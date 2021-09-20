@@ -24,7 +24,7 @@
 ## Part 2 - Exploring Virtualization
 
 ### Exploring Host Disk Usage
-1. My Guest OS is currently in my VirtualBoxVMs folder within my users folder. Checking the properties tells me it is currently 8 GBs of memory, this will expand when information is added to it, but not past 20 GBs.
+1. My Guest OS is currently in my VirtualBoxVMs folder within my users folder. Checking the properties tells me it is currently 8 GBs of memory, this will expand when data is added to it, up to 20 GBs.
 2. As of right now, I cannot access the files on my guest as I have not added the shared files Guest Additions, nor did I add any files as of the making of this assignment.
 3. Snapshots are essentially save files for your VM. Say you are pen testing or dealing with a malicious software. It is smart to make a snapshot prior to running the program so you can revert all damages done to the VM by going back to your snapshot. Snapshots are copies of the disk files of a VM. Clones are a entire copy of a virtual machine, the VM that has been copied will be considered a parent VM. Templates are master copies that can create a whole bunch of clones. The snapshot I created was near 800 MB, .save files, and .vdi files were found within the snapshot folder. Like stated earlier, snapshot are images of the DISK of the VM.
 
@@ -36,7 +36,4 @@
 
 ## Part 3 - Networking with Style
 
-- Pick a networking method besides NAT, and see what it does.
-- Document the networking configuration you choose.  
-- In class, we explored bridged & host-only networking, and demonstrated the effects of each of these.
-- If I were writing this up, I would likely use the example where I installed a web server and played with accessing it from the different IP configured on my host and guest
+I chose to investigate how a bridged network operates. This network works if your host computer is wired into your router through an ethernet cable. VirtualBox uses a device driver on your host system to intercept data from your ethernet network and "inject data into it" according to Oracle's website. Enabling bridged networking is very simple, you just have to be wired in through an ethernet cable. Once you are, go to your VM's settings in virtual box, click Network, then change the network type to bridge network, and select which controller your ethernet is running through. You will be able to prove that this network is up and running by pinging your VM using a device on your router that isn't your host computer. My IP changed while under a bridged network, I could ping my VM from my laptop, and I could browse YouTube with my VM. 
