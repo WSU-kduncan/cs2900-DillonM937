@@ -14,9 +14,9 @@
     - I gave my Ubuntu 20 GBs of space, fixed. Personally, my hard drive is getting quite full so I did not want my memory to be flex and expand upon 20 GBs.
     - The recommended allocation of RAM is 2 GBs for Virtual Box, I allocated 4 GBs to ensure smooth operation. My computer has 16 GBs to spare.
     - I did not choose to enable 3D Acceleration because I do not need it for any of my current courses. I have an NVIDIA 1060 6GB, so I do have the real estate to enable it.
-    ## If you choose to enable 3D Acceleration, on VirtualBox go to Settings > Display > Enable 3D Acceleration. 
+    - If you choose to enable 3D Acceleration, on VirtualBox go to Settings > Display > Enable 3D Acceleration. 
     - I personally added drag and drop shared clipboard, and fullscreen guest additions. Guest additions add quality of life features that are very nice to have.
-    # To add these Guest Additions, open your VM, click on Devices, and hover over Drag and Drop, enable it, then do the same for whichever Guest Addition you wish.
+    - To add these Guest Additions, open your VM, click on Devices, and hover over Drag and Drop, enable it, then do the same for whichever Guest Addition you wish.
 4. Install an OS to the Virtual Machine
     - For the Ubuntu Desktop install, you receive only one ISO file, this is your install ISO.
     - Once your VM is up and running, go back to the Virtual Box menu, click Settings > Storage, under the IDE controller you will see your ISO file, remove it. Your VM should now have all of the basic components set up.
