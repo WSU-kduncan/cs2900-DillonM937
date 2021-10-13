@@ -1,1 +1,68 @@
+Dillon McCormick
+Container Technologies
+
+    1 - Podman
+    2 - LSC -- Linux Containers
+
+How to install
+
+    1 - Podman Install Instructions
+    a. I installed Podman on my WSL2 Ubuntu VM. podman.io led me to another article at [Redhat.com](https://www.redhat.com/sysadmin/podman-windows-wsl2) where there is a script that installs the entire program. It is listed below.
+    . /etc/os-release
+    sudo sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/x${NAME}_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+    wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/x${NAME}_${VERSION_ID}/Release.key -O Release.key
+    sudo apt-key add - < Release.key
+    sudo apt-get update -qq
+    sudo apt-get -qq -y install podman
+    sudo mkdir -p /etc/containers
+    echo -e "[registries.search]\nregistries = ['docker.io', 'quay.io']" | sudo tee /etc/containers/registries.conf
+
+    2 - LXC Installation Instructions
+    a. sudo apt-get install lxc is the command I used to download LXC on my Ubuntu VM. I also updated my Ubuntu right before installing LXC.
+
+Pulling a container image
+
+    1 - Podman Pulling and Viewing Images 
+    a. I pulled the alpine image from podman, the command was: podman run -it alpine -sh
+    b. To view images on the system all you simply command is podman images, it will then list all of the images on your computer.
+
+    2 - LXC Pulling and Viewing Images
+    a. lxc image import would be the command you use in order to pull an image from somewhere on the internet. 
+    b. lxc image list images will list all of your LXC images. You can use grep to specify certain images you want to be displayed.
+
+
+Running a container
+
+    Run Vs. Initialization
+    a. The difference between running and initialization is quite simple. When you run a container you are starting up an EXISTING container that has been previously exited or stopped. Initializationatingis the process of creating an entirely new container or clone of a container and also starting it up.
+
+    1 - Podman Run And Enter Shell / Detached Mode
+    a. Adding -t to your podman run command will create and attach a pseudo-terminal to the standard input of the container, where you can then run an interactive shell.
+    b. To run podman in detached mode you can add -d to your podman run command. You can alternatively press Ctrl-P + Ctrl-Q while in an attached container.
+    
+    2 - LXC Run and Enter Shell / Detached Mode
+    a. To acquire a shell to be able to run on start you enter the command : lxc-attach -n *container name*. Once you put this command in you should have a shell you can access when you open the container again.
+    b. After research through man pages and other sources, I do not believe that LXC has a detached mode. I have read that they instead run the monitor process into the container runtime itself.
+
+Logs & Status
+
+    1 - Podman Status Display / Log Reading
+    a. A simple command "podman ps -a" will show you the status of all of your containers. 
+    b. podman logs -l will list the logs of the container. 
+
+    2 - LXC Status Display / Log Reading
+    a. lxc-info -n *container name* will display the of a container.
+    b. To read logs in an LXC container, you must locate the file named lxc.log.file. This will by default be file named after the container appended with .log, and will be located in your container's path or under /var/log/lxc.
+
+Stopping a container
+
+    Podman Pause / Resume / Stop
+    a. podman pause "container name or ID" will pause the defined container. This command will not work on cgroupv1 rootless container like my alpine container is. 
+    b. podman restart "container name or ID" will restart the defined container, podman unpause "container name or ID" will unpause the defined container. 
+    c. podman stop "container name or ID" will stop the defined container.
+
+    2 - LXC Pause / Resume / Stop
+    a. lxc-freeze -n *container name* does not do the exact same thing a "podman pause" command does, but serves a very similar purpose.
+    b. lxc-unfreeze -n *container name* will effectively work as an unpause.
+    c. lxc-stop -n *container name* will stop the container.
 
